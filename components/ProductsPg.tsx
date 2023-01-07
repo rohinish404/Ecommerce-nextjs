@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Product from './ProductCard'
 type DataProps = {
     data:{
         id:number
@@ -16,10 +16,10 @@ type DataProps = {
 function ProductsPg({data}:DataProps) {
     console.log(data)
   return (
-    <div>
+    <div className='grid grid-cols-3 gap-16 m-5 p-5 pb-8'>
       {data.map(function(data1,id){
           return(
-            <h1 className='text-3xl text-black' key={id}>{data1.title}</h1>
+            <Product key={id} dataset={data1}/>
           )
       })}
   
