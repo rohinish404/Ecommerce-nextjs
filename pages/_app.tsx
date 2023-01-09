@@ -8,10 +8,10 @@ import { ProductProvider } from "../contexts/MainContext";
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [showCart, setshowCart] = useState(false);
-  const [cartItems, setCartItems] = useState();
+  
+  
   const [totalPrice, settotalPrice] = useState();
-  const [setQuantities, settotalQuantities] = useState();
+  
 
   return (
     <>
