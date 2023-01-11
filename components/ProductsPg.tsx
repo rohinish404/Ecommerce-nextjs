@@ -14,7 +14,7 @@ type DataProps = {
 }
 
 function ProductsPg({data}:DataProps) {
-    console.log(data)
+
   return (
     <div className='grid grid-cols-3 gap-16 m-5 p-5 pb-8'>
       {data.map(function(data1,id){

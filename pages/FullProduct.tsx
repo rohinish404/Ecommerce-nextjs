@@ -8,26 +8,19 @@ function FullProduct() {
     idState,
     cartItems,
     setCartItems,
-    setQuantities,
-    settotalQuantities,
+    totalPrice, settotalPrice
   } = useProductContext();
-
-  const incValue = () => {
-    settotalQuantities((prev) => prev + 1);
-  };
-  const decValue = () => {
-    if (setQuantities >= 2) {
-      settotalQuantities((prev) => prev - 1);
-    }
-  };
-
+ 
 
   let sameId;
   let sametf;
+
   return (
     <div>
       {product.map(function (data, id) {
         if (data.id === idState) {
+          const [quantity,setQuantity] = useState(data.quantity);
+          data.quantity = quantity
           return (
             <div key={id}>
               <div
@@ -66,18 +59,22 @@ function FullProduct() {
                               title: data.title,
                               price: data.price,
                               image: data.image,
+                              quantity:data.quantity,
                             },
                           ];
                         });
                       }
+                      settotalPrice(
+                        (prev) => prev + data.quantity * Number(data.price)
+                      );
                     }}
                   >
                     Add to Cart
                   </button>
                   <div>
-                    <button onClick={incValue}>+</button>
-                    <p>{setQuantities}</p>
-                    <button onClick={decValue}>-</button>
+                    <button onClick={()=>setQuantity((prev)=>prev+1)}>+</button>
+                    <p>{quantity}</p>
+                    <button onClick={()=>quantity>=2 && setQuantity((prev)=>prev-1)}>-</button>
                   </div>
                 </div>
               </div>

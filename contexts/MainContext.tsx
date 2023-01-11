@@ -1,5 +1,6 @@
 import { type } from "os";
 import { createContext, ReactNode, useContext,useState,useEffect, Dispatch, SetStateAction } from "react";
+
 import {Product,Cart} from '../Interfaces/Product'
 
 type UseContextType= {
@@ -10,8 +11,8 @@ type UseContextType= {
     showCartHandler:()=>void
     cartItems:Cart[]
     setCartItems:Dispatch<SetStateAction<Cart[]>>
-    setQuantities:number 
-    settotalQuantities:Dispatch<SetStateAction<number>>
+    totalPrice:number
+    settotalPrice:Dispatch<SetStateAction<number>>
 }
 const mainContextDefaultValues: UseContextType = {
     product:[],
@@ -20,9 +21,9 @@ const mainContextDefaultValues: UseContextType = {
     showCart:false,
     showCartHandler:()=>{},
     cartItems:[],
-    setCartItems:()=>{}, 
-    setQuantities:1,
-    settotalQuantities:()=>{}
+    setCartItems:()=>{},
+    totalPrice:0,
+    settotalPrice:()=>{}
 };
  export const MainContext = createContext<UseContextType>(mainContextDefaultValues);
 
@@ -38,17 +39,19 @@ export function ProductProvider(props: Props) {
     const [idState,setidState] = useState<number>(0)
     const [showCart, setshowCart] = useState(false);
     const [cartItems, setCartItems] = useState<Cart[]>([]);
-    const [setQuantities, settotalQuantities] = useState<number>(1);
+    const [totalPrice, settotalPrice] = useState<number>(0);
+
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
                 .then(res=>res.json())
                 .then(data=>{
-    
-        setProduct(data);
+       
+        setProduct(data.map((item: any) =>({...item, quantity: 1})));
         isLoading(false);
         })
         .catch(err => console.log(err))
       }, []) 
+    
 
     const showCartHandler = ()=>{
         setshowCart((prev)=>!prev)
@@ -62,8 +65,8 @@ export function ProductProvider(props: Props) {
         showCartHandler,
         cartItems,
         setCartItems,
-        setQuantities,
-        settotalQuantities
+        totalPrice,
+        settotalPrice
     }
     return (
         <>

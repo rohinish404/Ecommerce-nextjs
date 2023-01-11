@@ -7,12 +7,6 @@ import { ProductProvider } from "../contexts/MainContext";
 
 
 export default function App({ Component, pageProps }: AppProps) {
-
-  
-  
-  const [totalPrice, settotalPrice] = useState();
-  
-
   return (
     <>
       <ProductProvider>

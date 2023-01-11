@@ -5,10 +5,12 @@ export interface Product{
         category: string;
         description: string;
         image: string;
+        quantity:number;
 }
 export interface Cart{
     id:number;
     title:string;
     price:string;
-    image:string
+    image:string;
+    quantity:number;
 }
