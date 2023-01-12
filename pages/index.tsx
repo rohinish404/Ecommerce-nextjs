@@ -5,17 +5,17 @@ import { MainContext, useProductContext} from '../contexts/MainContext';
 import ProductsPg from '../components/ProductsPg';
 import Banner from '../components/Banner';
 
-export async function getStaticProps(){
+// export async function getStaticProps(){
   
 
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-  );
-  return {
-    props:{},
-  }
-  }
+//   const supabaseAdmin = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+//     process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+//   );
+//   return {
+//     props:{},
+//   }
+//   }
 
 export default function Home() {
   

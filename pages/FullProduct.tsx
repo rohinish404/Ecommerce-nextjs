@@ -64,9 +64,11 @@ function FullProduct() {
                           ];
                         });
                       }
-                      settotalPrice(
-                        (prev) => prev + data.quantity * Number(data.price)
-                      );
+                      {cartItems.map(function(data,key){
+                        settotalPrice(
+                            (prev) => prev + data.quantity * Number(data.price)
+                          );
+                      })}
                     }}
                   >
                     Add to Cart

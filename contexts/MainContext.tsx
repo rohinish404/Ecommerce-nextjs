@@ -1,5 +1,6 @@
 import { type } from "os";
 import { createContext, ReactNode, useContext,useState,useEffect, Dispatch, SetStateAction } from "react";
+import { useLocalStorage } from "../Hooks/useLocalStorage";
 
 import {Product,Cart} from '../Interfaces/Product'
 
@@ -38,7 +39,7 @@ export function ProductProvider(props: Props) {
     const [loading,isLoading] = useState(true)
     const [idState,setidState] = useState<number>(0)
     const [showCart, setshowCart] = useState(false);
-    const [cartItems, setCartItems] = useState<Cart[]>([]);
+    const [cartItems, setCartItems] = useLocalStorage<Cart[]>("shopping-cart",[]);
     const [totalPrice, settotalPrice] = useState<number>(0);
 
     useEffect(()=>{

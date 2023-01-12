@@ -5,7 +5,8 @@ function Cart() {
   const { showCart, cartItems, totalPrice, settotalPrice } =
     useProductContext();
   console.log(totalPrice);
-
+  
+  
   return (
     <div>
       {showCart && (
@@ -31,7 +32,7 @@ function Cart() {
               </div>
             );
           })}
-          <div className="p-2 border-2 border-black fixed bottom-0 bg-white w-full">
+          <div className="p-2 border-y-2 border-black fixed bottom-0 bg-white w-full">
             <h1 className="ml-4">
               Total Price:
               <span className="ml-24">${totalPrice.toFixed(2)}</span>
