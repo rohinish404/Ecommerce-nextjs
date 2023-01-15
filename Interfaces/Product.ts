@@ -6,6 +6,7 @@ export interface Product{
         description: string;
         image: string;
         quantity:number;
+        total:number;
 }
 export interface Cart{
     id:number;
@@ -13,4 +14,5 @@ export interface Cart{
     price:string;
     image:string;
     quantity:number;
+    total:number
 }

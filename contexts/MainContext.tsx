@@ -1,4 +1,3 @@
-import { type } from "os";
 import { createContext, ReactNode, useContext,useState,useEffect, Dispatch, SetStateAction } from "react";
 import { useLocalStorage } from "../Hooks/useLocalStorage";
 
@@ -14,6 +13,7 @@ type UseContextType= {
     setCartItems:Dispatch<SetStateAction<Cart[]>>
     totalPrice:number
     settotalPrice:Dispatch<SetStateAction<number>>
+    xyz:number
 }
 const mainContextDefaultValues: UseContextType = {
     product:[],
@@ -24,7 +24,8 @@ const mainContextDefaultValues: UseContextType = {
     cartItems:[],
     setCartItems:()=>{},
     totalPrice:0,
-    settotalPrice:()=>{}
+    settotalPrice:()=>{},
+    xyz:0
 };
  export const MainContext = createContext<UseContextType>(mainContextDefaultValues);
 
@@ -41,13 +42,13 @@ export function ProductProvider(props: Props) {
     const [showCart, setshowCart] = useState(false);
     const [cartItems, setCartItems] = useLocalStorage<Cart[]>("shopping-cart",[]);
     const [totalPrice, settotalPrice] = useState<number>(0);
-
+    let xyz = 0;
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
                 .then(res=>res.json())
                 .then(data=>{
        
-        setProduct(data.map((item: any) =>({...item, quantity: 1})));
+        setProduct(data.map((item: any) =>({...item, quantity: 1,total:0})));
         isLoading(false);
         })
         .catch(err => console.log(err))
@@ -67,7 +68,8 @@ export function ProductProvider(props: Props) {
         cartItems,
         setCartItems,
         totalPrice,
-        settotalPrice
+        settotalPrice,
+        xyz
     }
     return (
         <>

@@ -2,15 +2,16 @@ import React from "react";
 import { useProductContext } from "../contexts/MainContext";
 import Image from "next/image";
 function Cart() {
-  const { showCart, cartItems, totalPrice, settotalPrice } =
+  const { showCart, cartItems} =
     useProductContext();
-  console.log(totalPrice);
-  
-  
+let {xyz} = useProductContext()
+ cartItems.forEach(element => {
+    xyz+=element.total
+  });
   return (
     <div>
       {showCart && (
-        <div className="z-40 border-2 border-black h-screen w-1/4 fixed right-0 top-0 transition ease-in duration-500 bg-white overflow-y-auto pb-8">
+        <div className="text-black z-40 border-2 border-black h-screen w-1/4 fixed right-0 top-0 transition ease-in duration-500 bg-white overflow-y-auto pb-8">
           {cartItems.map(function (cartItem, id) {
             return (
               <div
@@ -33,11 +34,11 @@ function Cart() {
             );
           })}
           <div className="p-2 border-y-2 border-black fixed bottom-0 bg-white w-full">
-            <h1 className="ml-4">
+            <button className="ml-4">
               Total Price:
-              <span className="ml-24">${totalPrice.toFixed(2)}</span>
-            </h1>
-            <button className="ml-20 rounded hover:bg-black hover:text-white mt-2 p-2 py-1 block border-2 border-black">
+              <span className="ml-24">${xyz.toFixed(2)}</span>
+            </button>
+            <button  className="ml-20 text-black rounded hover:bg-black hover:text-white mt-2 p-2 py-1 block border-2 border-black">
               Checkout
             </button>
           </div>
