@@ -17,7 +17,7 @@ function FullProduct() {
           return (
             <div key={id}>
               <div
-                className="relative top-10 w-screen p-12 flex justify-around"
+                className="relative top-10 w-screen p-12 flex flex-col justify-around sm:flex-row md:flex-row items-center"
                 key={id}
               >
                 <Image
@@ -27,7 +27,7 @@ function FullProduct() {
                   height={200}
                   width={200}
                 ></Image>
-                <div className="bg-gray-100 p-5 rounded-2xl w-2/5">
+                <div className="bg-gray-100 p-5 rounded-2xl mt-5 w-full sm:w-2/5">
                   <h1 className="text-xl font-semibold">{data.title}</h1>
                   <p className="mt-3 text-s font-light">
                     <span className="text-l font-semibold">
@@ -63,16 +63,16 @@ function FullProduct() {
                     Add to Cart
                   </button>
                   <div className="flex justify-around">
-                    <button onClick={() => setQuantity((prev) => prev + 1)}>
-                      +
+                    <button onClick={() =>
+                        quantity >= 2 && setQuantity((prev) => prev - 1)
+                      } >
+                      -
                     </button>
                     <p>{quantity}</p>
                     <button
-                      onClick={() =>
-                        quantity >= 2 && setQuantity((prev) => prev - 1)
-                      }
+                      onClick={() => setQuantity((prev) => prev + 1)}
                     >
-                      -
+                      +
                     </button>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ function FullProduct() {
           );
         }
       })}
-      <div className="grid grid-cols-10 items-center justify-center gap-7 m-5 mt-10 mb-16">
+      <div className="grid grid-cols-4 sm:grid-cols-10 items-center justify-center gap-7 m-5 mt-10 mb-16">
       {product.map(function (data, id) {
         return (
           <div key={id} className='rounded hover:scale-110 transition ease-in-out duration-200 cursor-pointer'>

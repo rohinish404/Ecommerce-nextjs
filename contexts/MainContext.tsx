@@ -14,6 +14,7 @@ type UseContextType= {
     totalPrice:number
     settotalPrice:Dispatch<SetStateAction<number>>
     xyz:number
+    setshowCart:Dispatch<SetStateAction<boolean>>
 }
 const mainContextDefaultValues: UseContextType = {
     product:[],
@@ -25,7 +26,8 @@ const mainContextDefaultValues: UseContextType = {
     setCartItems:()=>{},
     totalPrice:0,
     settotalPrice:()=>{},
-    xyz:0
+    xyz:0,
+    setshowCart:()=>{}
 };
  export const MainContext = createContext<UseContextType>(mainContextDefaultValues);
 
@@ -69,7 +71,8 @@ export function ProductProvider(props: Props) {
         setCartItems,
         totalPrice,
         settotalPrice,
-        xyz
+        xyz,
+        setshowCart
     }
     return (
         <>

@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useProductContext } from "../contexts/MainContext";
+import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 function Cart() {
-  const { showCart, cartItems} =
+  const { showCart, cartItems, setshowCart, setCartItems } =
     useProductContext();
-let {xyz} = useProductContext()
- cartItems.forEach(element => {
-    xyz+=element.total
+  let { xyz } = useProductContext();
+  cartItems.forEach((element) => {
+    xyz += element.total;
   });
+
+  const closehandler = () => {
+    setshowCart(false);
+  };
+  console.log(cartItems);
+
   return (
-    <div>
+    <div className="relative">
       {showCart && (
-        <div className="text-black z-40 border-2 border-black h-screen w-1/4 fixed right-0 top-0 transition ease-in duration-500 bg-white overflow-y-auto pb-8">
+        <div className="text-black z-40 border-2 border-black h-screen w-full fixed right-0 top-0 transition ease-in duration-500 bg-white overflow-y-auto pb-8 sm:w-1/4 sm:h-screen mb-10">
+          <button
+            onClick={closehandler}
+            className="hover:bg-black hover:text-white m-2 transition ease-out duration-500"
+          >
+            <AiOutlineClose size="2rem" />
+          </button>
           {cartItems.map(function (cartItem, id) {
             return (
               <div
@@ -30,6 +43,18 @@ let {xyz} = useProductContext()
                   <p>${cartItem.price}</p>
                   <p>Quantity: {cartItem.quantity}</p>
                 </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      const updatedCart = cartItems.filter(function (item) {
+                        return item.id !== cartItem.id;
+                      });
+                      setCartItems(updatedCart);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -38,7 +63,7 @@ let {xyz} = useProductContext()
               Total Price:
               <span className="ml-24">${xyz.toFixed(2)}</span>
             </button>
-            <button  className="ml-20 text-black rounded hover:bg-black hover:text-white mt-2 p-2 py-1 block border-2 border-black">
+            <button className="ml-20 text-black rounded hover:bg-black hover:text-white mt-2 p-2 py-1 block border-2 border-black">
               Checkout
             </button>
           </div>
