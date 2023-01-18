@@ -1,4 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## What this project is about
+
+It's an ecommerce web app where you can perform things like selecting an item, viewing full details of the product, adding the items to cart(manually selecting qunatity) and removing from the cart.
+
+## Tech stack and tools used in the project
+
+This project is built using NextJs, typescript, Tailwind CSS, local storage api( for saving the items added to cart using local storage ), supabase (for dynamically adding the banner on the home page). I just wanted to try out supabase.
 
 ## Getting Started
 
