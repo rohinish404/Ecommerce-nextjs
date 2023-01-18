@@ -51,7 +51,7 @@ function Cart() {
                       });
                       setCartItems(updatedCart);
                     }}
-                  >
+                  className='hover:text-red-500'>
                     Remove
                   </button>
                 </div>

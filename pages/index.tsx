@@ -5,22 +5,40 @@ import { MainContext, useProductContext} from '../contexts/MainContext';
 import ProductsPg from '../components/ProductsPg';
 import Banner from '../components/Banner';
 
-// export async function getStaticProps(){
+export async function getStaticProps(){
   
 
-//   const supabaseAdmin = createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-//     process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-//   );
-//   return {
-//     props:{},
-//   }
-//   }
-
-export default function Home() {
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
+  try{
+    const { data } = await supabaseAdmin
+    .from('banner')
+    .select('*')
+    .order('id');
+    return {
+      props:{
+        banner:data,
+      },
+    }
+  
+  }catch(error){
+    console.log(error);
+    return {
+      props:{
+        banner:[]
+      },
+    }}}
+type Banner1 = {
+  id:number
+  href: string
+  name: string
+}
+export default function Home({banner}:{banner: Banner1[]}) {
   
  const { product } =useProductContext()
-  
+  console.log(banner)
   return (
     <>
       <Head>
@@ -29,7 +47,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className='bg-gray-100'>
-        <Banner />
+      {banner.length > 0 ? banner.map(function(bann){
+          return(
+            <Banner key={bann.id} bann={[bann]}/>
+          )
+        }): <p>No banner data</p>}
         <ProductsPg data={product} />
 
       </div>
